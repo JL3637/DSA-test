@@ -1,4 +1,5 @@
 #include<stdio.h>
+
 #define arrlen 15
 
 void print_board(int *board, int n, int m){
