@@ -1,4 +1,5 @@
 #include<stdio.h>
+#define arrlen 100
 
 void print_board(int *board, int n, int m){
     int a = 0;
@@ -23,7 +24,7 @@ int check_valid_board(int *board, int n, int m, int *row_block_number, int *colu
     for(int i = 0; i < n; i++){
         int blocks_sum = 0;
         int cells_sum = 0;
-        int b = 20 * i;
+        int b = arrlen * i;
         int index = 0;
         for(int j = 0; j < m; j++){
             if(*(board + (m * i + j)) == 1 && index == 0){
@@ -62,10 +63,10 @@ int check_valid_board(int *board, int n, int m, int *row_block_number, int *colu
     for(int i = 0; i < m; i++){
         int blocks_sum = 0;
         int cells_sum = 0;
-        int b = 20 * i;
+        int b = arrlen * i;
         int index = 0;
         for(int j = 0; j < n; j++){
-            if(*(board + (i + n * j)) == 1 && index == 0){
+            if(*(board + (i + m * j)) == 1 && index == 0){
                 blocks_sum++;
                 cells_sum++;
                 index = 1;
@@ -75,7 +76,7 @@ int check_valid_board(int *board, int n, int m, int *row_block_number, int *colu
                     }
                 }
             }
-            else if(*(board + (i + n * j)) == 1 && index == 1){
+            else if(*(board + (i + m * j)) == 1 && index == 1){
                 cells_sum++;
                 if(j == n - 1){
                     if(cells_sum != *(column_cells + b)){
@@ -83,7 +84,7 @@ int check_valid_board(int *board, int n, int m, int *row_block_number, int *colu
                     }
                 }
             }
-            else if(*(board + (i + n * j)) == 0 && index == 1){
+            else if(*(board + (i + m * j)) == 0 && index == 1){
                 if(cells_sum != *(column_cells + b)){
                     return 0;
                 }
@@ -160,16 +161,16 @@ int main(){
     scanf("%d%d", &n, &m);
     int row_block_number[n];
     int column_block_number[m];
-    int row_cells[n][20];
+    int row_cells[n][arrlen];
     for(int i = 0; i < n; i++){
-        for(int j = 0; j < 20; j++){
+        for(int j = 0; j < arrlen; j++){
            row_cells[i][j] = 0; 
         }
     }
-    int column_cells[m][20];
+    int column_cells[m][arrlen];
     for(int i = 0; i < m; i++){
-        for(int j = 0; j < 20; j++){
-           row_cells[i][j] = 0; 
+        for(int j = 0; j < arrlen; j++){
+           column_cells[i][j] = 0; 
         }
     }
     for(int i = 0; i < n; i++){
