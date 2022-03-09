@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-#define arrlen 15
+#define arrlen 13
 
 void print_board(int *board, int n, int m){
     int a = 0;
@@ -125,7 +125,7 @@ int recursion(int *board, int n, int m, int *row_block_number, int *column_block
         }
     }
     else{
-        paint_board(board, position, 1);
+        paint_board(board, position, 0);
         int succeed = recursion(board, n, m, row_block_number, column_block_number, row_cells, column_cells, position);
         if(succeed){
             return 1;
@@ -133,7 +133,7 @@ int recursion(int *board, int n, int m, int *row_block_number, int *column_block
         else{
             *position -= 1;
         }
-        paint_board(board, position, 0);
+        paint_board(board, position, 1);
         succeed = recursion(board, n, m, row_block_number, column_block_number, row_cells, column_cells, position);
         if(succeed){
             return 1;
